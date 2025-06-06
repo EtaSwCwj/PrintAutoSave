@@ -33,7 +33,8 @@ Service1.cs ^
 Service1.Designer.cs ^
 ProjectInstaller.cs ^
 App.config ^
-PrintAutoSave.csproj
+PrintAutoSave.csproj ^
+Settings1.settings
 
 :: === [명시적 파일 복사] ===
 for %%F in (%FILES%) do (

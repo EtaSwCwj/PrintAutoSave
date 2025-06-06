@@ -10,6 +10,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.IO;
 
 namespace PrintAutoSave
 {
@@ -66,26 +67,28 @@ namespace PrintAutoSave
                 if (result == DialogResult.OK && selectForm.SelectedProcess != null)
                 {
                     selectedProcess = selectForm.SelectedProcess;
+
+                    // 💡 저장 간격 텍스트박스에서 읽기
+                    if (!int.TryParse(textBoxSaveInterval.Text, out int intervalSec) || intervalSec <= 0)
+                    {
+                        MessageBox.Show("유효한 숫자를 입력하세요 (초 단위)");
+                        return;
+                    }
+
+                    saveIntervalSeconds = intervalSec;
+                    tickCounter = 0;
+                    pendingSave = false;
+
                     timerAutoSave.Start();
-                    MessageBox.Show($"선택된 그림판 PID: {selectedProcess.Id}\n10초마다 저장이 시작됩니다.");
+                    CheckFilenameConsistency();
+
+                    MessageBox.Show($"선택된 그림판 PID: {selectedProcess.Id}\n{saveIntervalSeconds}초마다 저장이 시작됩니다.");
                 }
                 else
                 {
-                    MessageBox.Show("선택이 취소되었습니다.");
+                    MessageBox.Show("선택된 프로세스가 없습니다.");
                 }
             }
-        }
-
-        private bool IsUserRecentlyActive()
-        {
-            LASTINPUTINFO lii = new LASTINPUTINFO();
-            lii.cbSize = (uint)Marshal.SizeOf(typeof(LASTINPUTINFO));
-            GetLastInputInfo(ref lii);
-
-            uint idleTimeMs = (uint)Environment.TickCount - lii.dwTime;
-
-            // 2초 이내 입력이 있으면 true
-            return idleTimeMs < 2000;
         }
 
         private bool IsUserActivelyInputting()
@@ -102,6 +105,7 @@ namespace PrintAutoSave
 
         int tickCounter = 0;
         bool pendingSave = false;
+        int saveIntervalSeconds = 10; // 기본값: 10초
         private void timer1_Tick(object sender, EventArgs e)
         {
             labelTickTime.Text = $"Elapsed: {tickCounter} sec";
@@ -126,7 +130,7 @@ namespace PrintAutoSave
 
             tickCounter++;
 
-            if (tickCounter < 10)
+            if (tickCounter < saveIntervalSeconds)
                 return;
 
             // 10초 경과 이후: SaveCommand 조건 판단
@@ -142,6 +146,8 @@ namespace PrintAutoSave
                 else
                 {
                     SaveCommand();
+                    CheckFilenameConsistency();
+                    TryMoveSavedFile();
                     labelTickTime.Text = "[저장 완료]";
                     tickCounter = 0;
                     pendingSave = false;
@@ -154,6 +160,7 @@ namespace PrintAutoSave
                 {
                     SaveCommand();
                     labelTickTime.Text = "[보류 후 저장 완료]";
+                    TryMoveSavedFile();
                     tickCounter = 0;
                     pendingSave = false;
                 }
@@ -161,6 +168,117 @@ namespace PrintAutoSave
                 {
                     labelTickTime.Text = "[입력 중 → 대기 연장]";
                 }
+            }
+        }
+
+
+        private void CheckFilenameConsistency()
+        {
+            if (selectedProcess == null || selectedProcess.HasExited || string.IsNullOrEmpty(selectedImageFilePath))
+            {
+                labelStatus.Text = "[선택 없음]";
+                return;
+            }
+
+            string titleFromPaint = selectedProcess.MainWindowTitle; // 예: "제목 없음1.png - 그림판"
+            string expectedFileName = Path.GetFileName(selectedImageFilePath); // 예: "제목 없음1.png"
+
+            // 창 제목에서 ' - 그림판' 앞까지 잘라냄
+            string fileNameInWindow = titleFromPaint.Split('-')[0].Trim();
+
+            if (fileNameInWindow.Equals(expectedFileName, StringComparison.OrdinalIgnoreCase))
+            {
+                labelStatus.Text = "[파일명 일치]";
+            }
+            else
+            {
+                labelStatus.Text = "[⚠ 파일명 불일치]";
+            }
+        }
+
+        private string selectedImageFilePath = ""; // 내부 저장용
+
+        private void buttonBrowseFile_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = "저장된 그림 파일 선택";
+                ofd.Filter = "이미지 파일 (*.png;*.bmp;*.jpg)|*.png;*.bmp;*.jpg|모든 파일 (*.*)|*.*";
+
+                // Settings에서 마지막 경로 가져오기
+                string lastFolder = Settings.Default.LastImageFolder;
+                if (!string.IsNullOrEmpty(lastFolder) && Directory.Exists(lastFolder))
+                {
+                    ofd.InitialDirectory = lastFolder;
+                }
+                else
+                {
+                    ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+                }
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    selectedImageFilePath = ofd.FileName;
+                    labelSelectedFilePath.Text = selectedImageFilePath;
+
+                    // 📁 선택한 경로 저장 (폴더 경로만)
+                    Settings.Default.LastImageFolder = Path.GetDirectoryName(ofd.FileName);
+                    Settings.Default.Save();
+
+                    CheckFilenameConsistency();
+                }
+            }
+        }
+
+
+        private string targetFolderPath = ""; // 파일 이동 대상 폴더
+
+        private void buttonBrowseFolder_Click(object sender, EventArgs e)
+        {
+            using (var ofd = new OpenFileDialog())
+            {
+                ofd.Title = "이동할 폴더 선택";
+                ofd.Filter = "폴더 선택|*.this.is.not.a.real.extension"; // 선택 막기용
+                ofd.FileName = "이 폴더를 선택하려면 아무 파일도 선택하지 말고 '열기'를 누르세요";
+
+                // 폴더 선택용으로 초기 경로 지정
+                ofd.CheckFileExists = false;
+                ofd.ValidateNames = false;
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    // 선택된 파일의 경로에서 폴더만 추출
+                    targetFolderPath = Path.GetDirectoryName(ofd.FileName);
+                    labelBrowseFolder.Text = targetFolderPath;
+                }
+            }
+        }
+
+
+        private void TryMoveSavedFile()
+        {
+            if (string.IsNullOrEmpty(selectedImageFilePath) || string.IsNullOrEmpty(targetFolderPath))
+                return;
+
+            if (!File.Exists(selectedImageFilePath))
+                return;
+
+            string originalFileName = Path.GetFileNameWithoutExtension(selectedImageFilePath);
+            string extension = Path.GetExtension(selectedImageFilePath);
+
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+            string newFileName = $"{originalFileName}_{timestamp}{extension}";
+            string destinationPath = Path.Combine(targetFolderPath, newFileName);
+
+            try
+            {
+                File.Copy(selectedImageFilePath, destinationPath, true);
+                Console.WriteLine($"[INFO] 파일 이동됨: {destinationPath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] 파일 이동 실패: {ex.Message}");
             }
         }
 
