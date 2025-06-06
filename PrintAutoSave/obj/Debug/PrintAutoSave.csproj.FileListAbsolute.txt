@@ -7,3 +7,14 @@ C:\github\PrintAutoSave\obj\Debug\PrintAutoSave.csproj.GenerateResource.cache
 C:\github\PrintAutoSave\obj\Debug\PrintAutoSave.csproj.CoreCompileInputs.cache
 C:\github\PrintAutoSave\obj\Debug\PrintAutoSave.exe
 C:\github\PrintAutoSave\obj\Debug\PrintAutoSave.pdb
+C:\github2\PrintAutoSave\PrintAutoSave\obj\Debug\PrintAutoSave.csproj.AssemblyReference.cache
+C:\github2\PrintAutoSave\PrintAutoSave\obj\Debug\PrintAutoSave.Form1.resources
+C:\github2\PrintAutoSave\PrintAutoSave\obj\Debug\PrintAutoSave.Properties.Resources.resources
+C:\github2\PrintAutoSave\PrintAutoSave\obj\Debug\PrintAutoSave.csproj.GenerateResource.cache
+C:\github2\PrintAutoSave\PrintAutoSave\obj\Debug\PrintAutoSave.csproj.CoreCompileInputs.cache
+C:\github2\PrintAutoSave\PrintAutoSave\obj\Debug\PrintAutoSave.exe
+C:\github2\PrintAutoSave\PrintAutoSave\obj\Debug\PrintAutoSave.pdb
+C:\github2\PrintAutoSave\PrintAutoSave\bin\Debug\PrintAutoSave.exe.config
+C:\github2\PrintAutoSave\PrintAutoSave\bin\Debug\PrintAutoSave.exe
+C:\github2\PrintAutoSave\PrintAutoSave\bin\Debug\PrintAutoSave.pdb
+C:\github2\PrintAutoSave\PrintAutoSave\obj\Debug\PrintAutoSave.FormProcessSelect.resources
