@@ -1,0 +1,9 @@
+C:\github\PrintAutoSave\bin\Debug\PrintAutoSave.exe.config
+C:\github\PrintAutoSave\bin\Debug\PrintAutoSave.exe
+C:\github\PrintAutoSave\bin\Debug\PrintAutoSave.pdb
+C:\github\PrintAutoSave\obj\Debug\PrintAutoSave.csproj.AssemblyReference.cache
+C:\github\PrintAutoSave\obj\Debug\PrintAutoSave.Properties.Resources.resources
+C:\github\PrintAutoSave\obj\Debug\PrintAutoSave.csproj.GenerateResource.cache
+C:\github\PrintAutoSave\obj\Debug\PrintAutoSave.csproj.CoreCompileInputs.cache
+C:\github\PrintAutoSave\obj\Debug\PrintAutoSave.exe
+C:\github\PrintAutoSave\obj\Debug\PrintAutoSave.pdb
