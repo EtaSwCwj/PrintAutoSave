@@ -362,6 +362,9 @@ namespace PrintAutoSave
                     Settings.Default.LastImageFolder = Path.GetDirectoryName(ofd.FileName);
                     Settings.Default.Save();
 
+                    Settings.Default.LastImageFilePath = selectedImageFilePath;
+                    Settings.Default.Save();
+
                     // 현재 그림판 파일명과 선택된 파일명 일치 여부 확인
                     CheckFilenameConsistency();
                 }
@@ -391,6 +394,9 @@ namespace PrintAutoSave
                     // 선택된 파일의 경로에서 폴더만 추출
                     targetFolderPath = Path.GetDirectoryName(ofd.FileName);
                     labelBrowseFolder.Text = targetFolderPath;
+
+                    Settings.Default.LastMoveFolder = targetFolderPath;
+                    Settings.Default.Save();
                 }
             }
         }
@@ -472,6 +478,8 @@ namespace PrintAutoSave
                 userDefinedHotkeys = hotkeyBuffer.ToList();
                 string hotkeyText = string.Join(" + ", userDefinedHotkeys);
                 textBoxHotkey.Text = hotkeyText;
+                Settings.Default.HotkeyCombination = hotkeyText;
+                Settings.Default.Save();
                 // ❌ labelHotkeyTitle.Text = "현재 단축키:"; <-- 삭제하거나 주석 처리
                 buttonSetHotkey.Text = "단축키 입력";
             }
@@ -533,5 +541,37 @@ namespace PrintAutoSave
                    key == Keys.Alt || key == Keys.Menu;
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // 저장된 이미지 파일 경로 복원
+            if (!string.IsNullOrWhiteSpace(Settings.Default.LastImageFilePath))
+                selectedImageFilePath = Settings.Default.LastImageFilePath;
+
+            // 저장된 이동 대상 폴더 복원
+            if (!string.IsNullOrWhiteSpace(Settings.Default.LastMoveFolder))
+                targetFolderPath = Settings.Default.LastMoveFolder;
+
+            // 단축키 복원
+            string hotkey = Settings.Default.HotkeyCombination;
+            if (!string.IsNullOrWhiteSpace(hotkey))
+            {
+                userDefinedHotkeys = hotkey.Split('+')
+                    .Select(s =>
+                    {
+                        return Enum.TryParse<Keys>(s.Trim(), out var k) ? k : Keys.None;
+                    })
+                    .Where(k => k != Keys.None)
+                    .ToList();
+
+                textBoxHotkey.Text = hotkey;
+            }
+
+            // UI에 보여주기 (선택 경로를 라벨에 다시 표시)
+            if (!string.IsNullOrWhiteSpace(selectedImageFilePath))
+                labelSelectedFilePath.Text = selectedImageFilePath;
+
+            if (!string.IsNullOrWhiteSpace(targetFolderPath))
+                labelBrowseFolder.Text = targetFolderPath;
+        }
     }
 }

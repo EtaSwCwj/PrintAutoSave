@@ -47,7 +47,7 @@
             // 
             // buttonTest
             // 
-            this.buttonTest.Location = new System.Drawing.Point(46, 67);
+            this.buttonTest.Location = new System.Drawing.Point(24, 54);
             this.buttonTest.Name = "buttonTest";
             this.buttonTest.Size = new System.Drawing.Size(168, 44);
             this.buttonTest.TabIndex = 0;
@@ -64,7 +64,7 @@
             // 
             this.labelTickTime.AutoSize = true;
             this.labelTickTime.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labelTickTime.Location = new System.Drawing.Point(41, 24);
+            this.labelTickTime.Location = new System.Drawing.Point(19, 11);
             this.labelTickTime.Name = "labelTickTime";
             this.labelTickTime.Size = new System.Drawing.Size(96, 28);
             this.labelTickTime.TabIndex = 1;
@@ -72,7 +72,7 @@
             // 
             // textBoxSaveInterval
             // 
-            this.textBoxSaveInterval.Location = new System.Drawing.Point(51, 166);
+            this.textBoxSaveInterval.Location = new System.Drawing.Point(24, 153);
             this.textBoxSaveInterval.Name = "textBoxSaveInterval";
             this.textBoxSaveInterval.Size = new System.Drawing.Size(156, 25);
             this.textBoxSaveInterval.TabIndex = 2;
@@ -82,7 +82,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(46, 125);
+            this.label1.Location = new System.Drawing.Point(19, 112);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(211, 28);
             this.label1.TabIndex = 3;
@@ -90,7 +90,7 @@
             // 
             // buttonBrowseFile
             // 
-            this.buttonBrowseFile.Location = new System.Drawing.Point(51, 239);
+            this.buttonBrowseFile.Location = new System.Drawing.Point(24, 214);
             this.buttonBrowseFile.Name = "buttonBrowseFile";
             this.buttonBrowseFile.Size = new System.Drawing.Size(179, 44);
             this.buttonBrowseFile.TabIndex = 4;
@@ -100,7 +100,7 @@
             // 
             // buttonBrowseFolder
             // 
-            this.buttonBrowseFolder.Location = new System.Drawing.Point(51, 329);
+            this.buttonBrowseFolder.Location = new System.Drawing.Point(24, 291);
             this.buttonBrowseFolder.Name = "buttonBrowseFolder";
             this.buttonBrowseFolder.Size = new System.Drawing.Size(179, 44);
             this.buttonBrowseFolder.TabIndex = 5;
@@ -112,11 +112,11 @@
             // 
             this.labelSelectedFilePath.AutoSize = true;
             this.labelSelectedFilePath.Font = new System.Drawing.Font("굴림", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labelSelectedFilePath.Location = new System.Drawing.Point(48, 219);
+            this.labelSelectedFilePath.Location = new System.Drawing.Point(21, 194);
             this.labelSelectedFilePath.Name = "labelSelectedFilePath";
-            this.labelSelectedFilePath.Size = new System.Drawing.Size(127, 17);
+            this.labelSelectedFilePath.Size = new System.Drawing.Size(81, 17);
             this.labelSelectedFilePath.TabIndex = 6;
-            this.labelSelectedFilePath.Text = "저장 인터벌(초)";
+            this.labelSelectedFilePath.Text = "파일 주소";
             // 
             // labelStatus
             // 
@@ -132,15 +132,15 @@
             // 
             this.labelBrowseFolder.AutoSize = true;
             this.labelBrowseFolder.Font = new System.Drawing.Font("굴림", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labelBrowseFolder.Location = new System.Drawing.Point(48, 309);
+            this.labelBrowseFolder.Location = new System.Drawing.Point(21, 271);
             this.labelBrowseFolder.Name = "labelBrowseFolder";
-            this.labelBrowseFolder.Size = new System.Drawing.Size(127, 17);
+            this.labelBrowseFolder.Size = new System.Drawing.Size(81, 17);
             this.labelBrowseFolder.TabIndex = 8;
-            this.labelBrowseFolder.Text = "저장 인터벌(초)";
+            this.labelBrowseFolder.Text = "폴더 주소";
             // 
             // button1StartAndPause
             // 
-            this.button1StartAndPause.Location = new System.Drawing.Point(299, 67);
+            this.button1StartAndPause.Location = new System.Drawing.Point(246, 54);
             this.button1StartAndPause.Name = "button1StartAndPause";
             this.button1StartAndPause.Size = new System.Drawing.Size(168, 44);
             this.button1StartAndPause.TabIndex = 9;
@@ -152,15 +152,15 @@
             // 
             this.labelHotkeyTitle.AutoSize = true;
             this.labelHotkeyTitle.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labelHotkeyTitle.Location = new System.Drawing.Point(294, 142);
+            this.labelHotkeyTitle.Location = new System.Drawing.Point(19, 356);
             this.labelHotkeyTitle.Name = "labelHotkeyTitle";
-            this.labelHotkeyTitle.Size = new System.Drawing.Size(211, 28);
+            this.labelHotkeyTitle.Size = new System.Drawing.Size(161, 28);
             this.labelHotkeyTitle.TabIndex = 10;
-            this.labelHotkeyTitle.Text = "저장 인터벌(초)";
+            this.labelHotkeyTitle.Text = "단축키 설정";
             // 
             // textBoxHotkey
             // 
-            this.textBoxHotkey.Location = new System.Drawing.Point(299, 182);
+            this.textBoxHotkey.Location = new System.Drawing.Point(24, 396);
             this.textBoxHotkey.Name = "textBoxHotkey";
             this.textBoxHotkey.Size = new System.Drawing.Size(420, 25);
             this.textBoxHotkey.TabIndex = 11;
@@ -168,7 +168,7 @@
             // 
             // buttonSetHotkey
             // 
-            this.buttonSetHotkey.Location = new System.Drawing.Point(299, 219);
+            this.buttonSetHotkey.Location = new System.Drawing.Point(24, 433);
             this.buttonSetHotkey.Name = "buttonSetHotkey";
             this.buttonSetHotkey.Size = new System.Drawing.Size(168, 44);
             this.buttonSetHotkey.TabIndex = 12;
@@ -180,7 +180,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 542);
             this.Controls.Add(this.buttonSetHotkey);
             this.Controls.Add(this.textBoxHotkey);
             this.Controls.Add(this.labelHotkeyTitle);
@@ -196,6 +196,7 @@
             this.Controls.Add(this.buttonTest);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

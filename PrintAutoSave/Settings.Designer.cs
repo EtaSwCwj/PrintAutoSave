@@ -34,5 +34,41 @@ namespace PrintAutoSave {
                 this["LastImageFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastImageFilePath {
+            get {
+                return ((string)(this["LastImageFilePath"]));
+            }
+            set {
+                this["LastImageFilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastMoveFolder {
+            get {
+                return ((string)(this["LastMoveFolder"]));
+            }
+            set {
+                this["LastMoveFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HotkeyCombination {
+            get {
+                return ((string)(this["HotkeyCombination"]));
+            }
+            set {
+                this["HotkeyCombination"] = value;
+            }
+        }
     }
 }
