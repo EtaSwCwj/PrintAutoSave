@@ -10,13 +10,14 @@ for %%* in (.) do set "OUTPUT_NAME=%%~nx*"
 set "VERSION=ver0.1"
 for /f "tokens=2 delims==." %%I in ('"wmic os get localdatetime /value"') do set datetime=%%I
 set "DATE=%datetime:~0,8%"
+set "TIME=%datetime:~8,4%"  :: HHmm 형식 (예: 1423)
 
 :: === [중복 방지용 zip 파일명 결정] ===
-set "ZIP_NAME=%OUTPUT_NAME%_%VERSION%_%DATE%.zip"
+set "ZIP_NAME=%OUTPUT_NAME%_%VERSION%_%DATE%_%TIME%.zip"
 set /a COUNT=1
 :CHECK_DUPLICATE
 if exist "%ZIP_NAME%" (
-    set "ZIP_NAME=%OUTPUT_NAME%_%VERSION%_%DATE%_%COUNT%.zip"
+    set "ZIP_NAME=%OUTPUT_NAME%_%VERSION%_%DATE%_%TIME%_%COUNT%.zip"
     set /a COUNT+=1
     goto CHECK_DUPLICATE
 )
@@ -67,6 +68,7 @@ popd >nul
     echo project_version = %VERSION%
     echo zip_name = %ZIP_NAME%
     echo created_at = %DATE%
+    echo created_at = %DATE%_%TIME%
     echo.
     echo description = PrintAutoSave 프로젝트 백업 압축 파일입니다.
     echo framework = .NET Framework 4.8 (C# WinForms)

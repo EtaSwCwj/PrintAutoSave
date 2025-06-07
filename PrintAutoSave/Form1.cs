@@ -79,7 +79,7 @@ namespace PrintAutoSave
                     tickCounter = 0;
                     pendingSave = false;
 
-                    timerAutoSave.Start();
+                    //timerAutoSave.Start();
                     CheckFilenameConsistency();
 
                     MessageBox.Show($"선택된 그림판 PID: {selectedProcess.Id}\n{saveIntervalSeconds}초마다 저장이 시작됩니다.");
@@ -282,6 +282,22 @@ namespace PrintAutoSave
             }
         }
 
+        bool SendStartPause = false;
+        private void button1StartAndPause_Click(object sender, EventArgs e)
+        {
+            if(SendStartPause == false)
+            {
+                button1StartAndPause.Text = "동작 중";
+                timerAutoSave.Start();
+                SendStartPause = true;
+            }
+            else if(SendStartPause == true)
+            {
+                button1StartAndPause.Text = "정지";
+                timerAutoSave.Stop();
+                SendStartPause = false;
+            }
+        }
     }
 }
 

@@ -39,6 +39,7 @@
             this.labelSelectedFilePath = new System.Windows.Forms.Label();
             this.labelStatus = new System.Windows.Forms.Label();
             this.labelBrowseFolder = new System.Windows.Forms.Label();
+            this.button1StartAndPause = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonTest
@@ -134,11 +135,22 @@
             this.labelBrowseFolder.TabIndex = 8;
             this.labelBrowseFolder.Text = "저장 인터벌(초)";
             // 
+            // button1StartAndPause
+            // 
+            this.button1StartAndPause.Location = new System.Drawing.Point(299, 67);
+            this.button1StartAndPause.Name = "button1StartAndPause";
+            this.button1StartAndPause.Size = new System.Drawing.Size(168, 44);
+            this.button1StartAndPause.TabIndex = 9;
+            this.button1StartAndPause.Text = "정지";
+            this.button1StartAndPause.UseVisualStyleBackColor = true;
+            this.button1StartAndPause.Click += new System.EventHandler(this.button1StartAndPause_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1StartAndPause);
             this.Controls.Add(this.labelBrowseFolder);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.labelSelectedFilePath);
@@ -167,6 +179,7 @@
         private System.Windows.Forms.Label labelSelectedFilePath;
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.Label labelBrowseFolder;
+        private System.Windows.Forms.Button button1StartAndPause;
     }
 }
 
