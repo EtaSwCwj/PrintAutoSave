@@ -47,7 +47,7 @@
             this.buttonTest.Name = "buttonTest";
             this.buttonTest.Size = new System.Drawing.Size(168, 44);
             this.buttonTest.TabIndex = 0;
-            this.buttonTest.Text = "button1";
+            this.buttonTest.Text = "프로세스 선택";
             this.buttonTest.UseVisualStyleBackColor = true;
             this.buttonTest.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -62,9 +62,9 @@
             this.labelTickTime.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.labelTickTime.Location = new System.Drawing.Point(41, 24);
             this.labelTickTime.Name = "labelTickTime";
-            this.labelTickTime.Size = new System.Drawing.Size(89, 28);
+            this.labelTickTime.Size = new System.Drawing.Size(96, 28);
             this.labelTickTime.TabIndex = 1;
-            this.labelTickTime.Text = "label1";
+            this.labelTickTime.Text = "타이밍";
             // 
             // textBoxSaveInterval
             // 

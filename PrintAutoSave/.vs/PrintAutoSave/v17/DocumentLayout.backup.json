@@ -7,20 +7,20 @@
       "RelativeMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|c:\\github2\\printautosave\\printautosave\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}",
-      "RelativeMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|solutionrelative:settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|c:\\github2\\printautosave\\printautosave\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|c:\\github2\\printautosave\\printautosave\\formselectprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|solutionrelative:formselectprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|c:\\github2\\printautosave\\printautosave\\formselectprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|solutionrelative:formselectprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|c:\\github2\\printautosave\\printautosave\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}",
+      "RelativeMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|solutionrelative:settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|c:\\github2\\printautosave\\printautosave\\formselectprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6CFDFEEE-7A3A-42F2-BFBE-AA1DBC4CC6ED}|PrintAutoSave.csproj|solutionrelative:formselectprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "FormSelectProcess.cs [\uB514\uC790\uC778]",
               "DocumentMoniker": "C:\\github2\\PrintAutoSave\\PrintAutoSave\\FormSelectProcess.cs",
               "RelativeDocumentMoniker": "FormSelectProcess.cs",
@@ -46,7 +46,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Form1.cs [\uB514\uC790\uC778]",
               "DocumentMoniker": "C:\\github2\\PrintAutoSave\\PrintAutoSave\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
@@ -64,7 +64,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Settings.settings",
               "DocumentMoniker": "C:\\github2\\PrintAutoSave\\PrintAutoSave\\Settings.settings",
               "RelativeDocumentMoniker": "Settings.settings",
@@ -76,7 +76,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "FormSelectProcess.cs",
               "DocumentMoniker": "C:\\github2\\PrintAutoSave\\PrintAutoSave\\FormSelectProcess.cs",
               "RelativeDocumentMoniker": "FormSelectProcess.cs",
@@ -95,7 +95,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\github2\\PrintAutoSave\\PrintAutoSave\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAALwAAAAAAAAAAAAUwOMAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAMMAAAAAAAAAAAAIwNoAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-06T17:51:56.553Z",
               "EditorCaption": ""
