@@ -40,6 +40,9 @@
             this.labelStatus = new System.Windows.Forms.Label();
             this.labelBrowseFolder = new System.Windows.Forms.Label();
             this.button1StartAndPause = new System.Windows.Forms.Button();
+            this.labelHotkeyTitle = new System.Windows.Forms.Label();
+            this.textBoxHotkey = new System.Windows.Forms.TextBox();
+            this.buttonSetHotkey = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonTest
@@ -141,15 +144,46 @@
             this.button1StartAndPause.Name = "button1StartAndPause";
             this.button1StartAndPause.Size = new System.Drawing.Size(168, 44);
             this.button1StartAndPause.TabIndex = 9;
-            this.button1StartAndPause.Text = "정지";
+            this.button1StartAndPause.Text = "시작";
             this.button1StartAndPause.UseVisualStyleBackColor = true;
             this.button1StartAndPause.Click += new System.EventHandler(this.button1StartAndPause_Click);
+            // 
+            // labelHotkeyTitle
+            // 
+            this.labelHotkeyTitle.AutoSize = true;
+            this.labelHotkeyTitle.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.labelHotkeyTitle.Location = new System.Drawing.Point(294, 142);
+            this.labelHotkeyTitle.Name = "labelHotkeyTitle";
+            this.labelHotkeyTitle.Size = new System.Drawing.Size(211, 28);
+            this.labelHotkeyTitle.TabIndex = 10;
+            this.labelHotkeyTitle.Text = "저장 인터벌(초)";
+            // 
+            // textBoxHotkey
+            // 
+            this.textBoxHotkey.Location = new System.Drawing.Point(299, 182);
+            this.textBoxHotkey.Name = "textBoxHotkey";
+            this.textBoxHotkey.Size = new System.Drawing.Size(420, 25);
+            this.textBoxHotkey.TabIndex = 11;
+            this.textBoxHotkey.Text = "10";
+            // 
+            // buttonSetHotkey
+            // 
+            this.buttonSetHotkey.Location = new System.Drawing.Point(299, 219);
+            this.buttonSetHotkey.Name = "buttonSetHotkey";
+            this.buttonSetHotkey.Size = new System.Drawing.Size(168, 44);
+            this.buttonSetHotkey.TabIndex = 12;
+            this.buttonSetHotkey.Text = "단축키 입력";
+            this.buttonSetHotkey.UseVisualStyleBackColor = true;
+            this.buttonSetHotkey.Click += new System.EventHandler(this.buttonSetHotkey_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonSetHotkey);
+            this.Controls.Add(this.textBoxHotkey);
+            this.Controls.Add(this.labelHotkeyTitle);
             this.Controls.Add(this.button1StartAndPause);
             this.Controls.Add(this.labelBrowseFolder);
             this.Controls.Add(this.labelStatus);
@@ -180,6 +214,9 @@
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.Label labelBrowseFolder;
         private System.Windows.Forms.Button button1StartAndPause;
+        private System.Windows.Forms.Label labelHotkeyTitle;
+        private System.Windows.Forms.TextBox textBoxHotkey;
+        private System.Windows.Forms.Button buttonSetHotkey;
     }
 }
 

@@ -106,10 +106,66 @@ namespace PrintAutoSave
         int tickCounter = 0;
         bool pendingSave = false;
         int saveIntervalSeconds = 10; // 기본값: 10초
+        private bool isHotkeyPressed = false; // 단축키 눌림 여부
+        private bool isHotkeyBlockActive = false; // 저장 차단 상태 플래그
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             labelTickTime.Text = $"Elapsed: {tickCounter} sec";
 
+            // 🔸 단축키 눌림 상태 확인 및 플래그 제어
+            if (userDefinedHotkeys.Count > 0)
+            {
+                bool allPressed = true;
+                foreach (var key in userDefinedHotkeys)
+                {
+                    Keys checkKey = key;
+
+                    // Modifier 키는 감지 가능한 키로 변환
+                    if (key == Keys.Control) checkKey = Keys.ControlKey;
+                    else if (key == Keys.Shift) checkKey = Keys.ShiftKey;
+                    else if (key == Keys.Alt) checkKey = Keys.Menu;
+
+                    if ((GetAsyncKeyState(checkKey) & 0x8000) == 0)
+                    {
+                        allPressed = false;
+                        break;
+                    }
+                }
+
+                if (allPressed)
+                {
+                    labelHotkeyTitle.Text = "단축키 눌림";
+                    isHotkeyBlockActive = true;
+                    isHotkeyPressed = true;
+                }
+                else
+                {
+                    labelHotkeyTitle.Text = "단축키 해제됨";
+                    if (isHotkeyPressed)
+                    {
+                        isHotkeyPressed = false;
+                        isHotkeyBlockActive = false;
+
+                        SaveCommand();
+                        CheckFilenameConsistency();
+                        TryMoveSavedFile();
+
+                        labelTickTime.Text = "[단축키 해제 → 저장됨]";
+                        tickCounter = 0;
+                        pendingSave = false;
+                    }
+                }
+            }
+
+            // 🔸 저장 차단 상태면 아무 것도 하지 않음
+            if (isHotkeyBlockActive)
+            {
+                labelTickTime.Text = "[단축키 눌림 중 → 저장 차단]";
+                return;
+            }
+
+            // 🔸 대상 프로세스가 유효한지 확인
             if (selectedProcess == null || selectedProcess.HasExited)
             {
                 tickCounter = 0;
@@ -117,6 +173,7 @@ namespace PrintAutoSave
                 return;
             }
 
+            // 🔸 포커스 확인
             IntPtr foreground = GetForegroundWindow();
             IntPtr selectedHwnd = selectedProcess.MainWindowHandle;
 
@@ -128,18 +185,18 @@ namespace PrintAutoSave
                 return;
             }
 
+            // 🔸 타이머 증가
             tickCounter++;
 
             if (tickCounter < saveIntervalSeconds)
                 return;
 
-            // 10초 경과 이후: SaveCommand 조건 판단
-            if (pendingSave == false)
+            // 🔸 저장 조건 판단
+            if (!pendingSave)
             {
-                // 10초 도달 → 저장 시도 시작
                 if (IsUserActivelyInputting())
                 {
-                    pendingSave = true; // 저장은 보류
+                    pendingSave = true;
                     labelTickTime.Text = "[입력 중 → 저장 대기]";
                     return;
                 }
@@ -155,7 +212,6 @@ namespace PrintAutoSave
             }
             else
             {
-                // 보류 상태 → 계속 입력 체크
                 if (!IsUserActivelyInputting())
                 {
                     SaveCommand();
@@ -170,6 +226,8 @@ namespace PrintAutoSave
                 }
             }
         }
+
+
 
 
         private void CheckFilenameConsistency()
@@ -298,6 +356,86 @@ namespace PrintAutoSave
                 SendStartPause = false;
             }
         }
+
+
+        private bool isSettingHotkey = false;
+        private HashSet<Keys> hotkeyBuffer = new HashSet<Keys>();
+        private List<Keys> userDefinedHotkeys = new List<Keys>();
+
+        private void buttonSetHotkey_Click(object sender, EventArgs e)
+        {
+            if (!isSettingHotkey)
+            {
+                // 입력 대기 시작
+                isSettingHotkey = true;
+                hotkeyBuffer.Clear();
+                labelHotkeyTitle.Text = "단축키 입력 중...";
+                buttonSetHotkey.Text = "입력 완료";
+            }
+            else
+            {
+                // 단축키 설정 완료
+                isSettingHotkey = false;
+                userDefinedHotkeys = hotkeyBuffer.ToList();
+                string hotkeyText = string.Join(" + ", userDefinedHotkeys);
+                textBoxHotkey.Text = hotkeyText;
+                // ❌ labelHotkeyTitle.Text = "현재 단축키:"; <-- 삭제하거나 주석 처리
+                buttonSetHotkey.Text = "단축키 입력";
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (isSettingHotkey)
+            {
+                // 누를 때마다 초기화하고 마지막 조합만 저장
+                hotkeyBuffer.Clear();
+
+                Keys normalizedKey = keyData;
+
+                if (keyData == Keys.ControlKey || keyData == Keys.LControlKey || keyData == Keys.RControlKey)
+                    normalizedKey = Keys.Control;
+                else if (keyData == Keys.ShiftKey || keyData == Keys.LShiftKey || keyData == Keys.RShiftKey)
+                    normalizedKey = Keys.Shift;
+                else if (keyData == Keys.Menu || keyData == Keys.LMenu || keyData == Keys.RMenu)
+                    normalizedKey = Keys.Alt;
+
+                // 조합키 감지
+                if ((keyData & Keys.Control) == Keys.Control) hotkeyBuffer.Add(Keys.Control);
+                if ((keyData & Keys.Shift) == Keys.Shift) hotkeyBuffer.Add(Keys.Shift);
+                if ((keyData & Keys.Alt) == Keys.Alt) hotkeyBuffer.Add(Keys.Alt);
+
+                // 일반 키 추가
+                Keys mainKey = keyData & Keys.KeyCode;
+                if (!IsModifierKey(mainKey))
+                    hotkeyBuffer.Add(mainKey);
+
+                // 보기 좋게 정리해서 출력
+                List<string> displayList = new List<string>();
+                if (hotkeyBuffer.Contains(Keys.Control)) displayList.Add("Control");
+                if (hotkeyBuffer.Contains(Keys.Shift)) displayList.Add("Shift");
+                if (hotkeyBuffer.Contains(Keys.Alt)) displayList.Add("Alt");
+
+                var others = hotkeyBuffer.Except(new[] { Keys.Control, Keys.Shift, Keys.Alt });
+                foreach (var key in others)
+                    displayList.Add(key.ToString());
+
+                textBoxHotkey.Text = string.Join(" + ", displayList);
+
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        // 보조 함수
+        private bool IsModifierKey(Keys key)
+        {
+            return key == Keys.Control || key == Keys.ControlKey ||
+                   key == Keys.Shift || key == Keys.ShiftKey ||
+                   key == Keys.Alt || key == Keys.Menu;
+        }
+
     }
 }
 
